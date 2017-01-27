@@ -1,7 +1,10 @@
 const http = require('http');
 const jwt = require('jwt-simple');
 const server = http.createServer((req, res) => {
-  res.writeHead(200, {'Content-Type': 'application/json'});
+  res.writeHead(200, {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'
+  });
   const currentTimeUnixSecs = Math.floor(Date.now() / 1000);
   res.end(JSON.stringify({
     "access_token": jwt.encode({
