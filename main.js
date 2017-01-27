@@ -6,10 +6,11 @@ const server = http.createServer((req, res) => {
     'Access-Control-Allow-Origin': '*'
   });
   const currentTimeUnixSecs = Math.floor(Date.now() / 1000);
+  const issuedAtUnixSecs = currentTimeUnixSecs - 60; // Margin of error for clocks being slightly out of sync
   res.end(JSON.stringify({
     "access_token": jwt.encode({
-      "iat": currentTimeUnixSecs,
-      "exp": currentTimeUnixSecs + (60 * 60 * 24),
+      "iat": issuedAtUnixSecs,
+      "exp": issuedAtUnixSecs + (60 * 60 * 24),
       "iss": "keys/" + "cfabdc6f-c256-4a93-be36-c2a945eb1253",
       "app": "2efb721e-090b-4eda-bc2c-f6c1311208f6",
       "sub": "jim"
