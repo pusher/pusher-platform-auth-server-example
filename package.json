@@ -4,5 +4,10 @@
   },
   "scripts": {
     "start": "node main.js"
-  }
+  },
+  "repository" : {
+    "type": "git",
+    "url": "https://github.com/pusher/pusher-platform-auth-server-example.git"
+  },
+  "license": "MIT"
 }
