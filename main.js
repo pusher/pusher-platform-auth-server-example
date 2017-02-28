@@ -19,19 +19,19 @@ const server = http.createServer((req, res) => {
       var bodyForm = qs.parse(body);
 
       if (bodyForm.grant_type !== "client_credentials") {
-        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.writeHead(400, { 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' });
         res.end(JSON.stringify({"error": "expected 'grant_type=client_credentials' in request form data (other grant types not supported)"}));
       } else {
         const currentTimeUnixSecs = Math.floor(Date.now() / 1000);
         const issuedAtUnixSecs = currentTimeUnixSecs - 60; // Margin of error for clocks being slightly out of sync
 
         if (!bodyForm.credentials) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.writeHead(400, { 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' });
           res.end(JSON.stringify({"error": "expected 'credentials' key in request form data (set this to your username; I'm very insecure!)"}));
         } else {
           let userId = bodyForm.credentials;
 
-          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.writeHead(200, { 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' });
           res.end(JSON.stringify({
             "access_token": jwt.encode(
               {
